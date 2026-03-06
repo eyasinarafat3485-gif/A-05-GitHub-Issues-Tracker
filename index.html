@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker</title>
+
+    <link rel="stylesheet" href="tailwind.config.css">
+
+    <!-- tailwind and daisy add -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+      <!-- font awesome icons -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+    <header class="bg-gray-200">
+        <main class="min-h-screen max-w-md bg-white mx-auto rounded-2xl">
+            <!-- logo section -->
+            <div class="logo w-[100px] mx-auto text-center justify-center align-centre pt-5">
+                <img src="assets/github-logo.png" alt="">
+            </div>
+            <div class="text-center pt-5">
+                <h2 class="font-bold text-2xl">GitHub Issues Tracker</h2>
+                <p class="hello">Sign in to manage your issues</p>
+            </div>
+
+            <div class="form pt-10">
+                <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-1xl mx-auto rounded-2xl">
+                    <div class="card-body">
+
+                        <!-- sign in from section -->
+                        <fieldset class="fieldset">
+                            <label class="label text-neutral font-semibold text-[20px]">Username</label>
+                            <input id="input-Username" maxlength="5" minlength="5" value="admin" type="text" class="input rounded-sm w-full bg-base-200"
+                                placeholder="Enter Username" />
+                            <p class="text-blue-600 text-[15px]">Default: admin</p>
+                            <br>
+                            <label class="label text-neutral font-semibold text-[20px]">Password</label>
+                            <input id="input-pin" maxlength="8" minlength="8" value="admin123" type="password"
+                                class="input rounded-sm w-full bg-base-200" placeholder="Enter Password" />
+                            <p class="text-blue-600 text-[15px]">Default: admin123</p>
+                            <!-- <div><a class="link link-hover">Forgot password?</a></div> -->
+                            <button id="btnSignIn" class="btn btn-primary rounded-sm w-full mt-4">Sign In</button>
+
+                            <!-- OR section -->
+                            <div class="flex w-full flex-col pt-5">
+                                <div class="divider text-xl">OR</div>
+                                <p class="hello text-center text-[15px]">Demo Credentials:</p>
+                                <div class="text-[18px] card bg-base-300 rounded-box grid h-20 place-items-center">Username: admin <br> Password: admin123
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </header>
+
+    <script src="java-script/index.js"></script>
+</body>
+
+</html>
