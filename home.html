@@ -13,34 +13,174 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- font awesome icons -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <header>
         <!-- navbar section -->
-    <div class="navbar bg-base-100 shadow-sm">
-        <div class="flex flex-3 pl-[41px] ">
-            <img src="assets/github-logo.png" alt="" class="w-[41px] ">
-            <a class="btn btn-ghost text-xl">GitHub Issues Tracker</a>
+        <div class="navbar bg-base-100 shadow-sm">
+            <div class="flex flex-3 pl-[41px] ">
+                <img src="assets/github-logo.png" alt="" class="w-[41px] ">
+                <a class="btn btn-ghost text-xl">GitHub Issues Tracker</a>
+            </div>
+            <div class="flex sm:gap-1 md:gap-5 pr-[41px]">
+                <label class="input">
+                    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                            stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </g>
+                    </svg>
+                    <input type="search" required placeholder="Search issues..." />
+                </label>
+                <button class="btn bg-blue-500 text-white"><span><i class="fa-solid fa-plus"></i></span>New
+                    Issue</button>
+
+            </div>
         </div>
-        <div class="flex gap-5 pr-[41px]">
-            <label class="input">
-                <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
-                        stroke="currentColor">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.3-4.3"></path>
-                    </g>
-                </svg>
-                <input type="search" required placeholder="Search issues..." />
-            </label>
-            <button class="btn btn-soft btn-primary"><span><i class="fa-solid fa-plus"></i></span>New Issue</button>
-        </div>
-    </div>
+    </header>
 
     <!-- count section -->
-    </header>
+    <main class=" bg-gray-200 pt-20 ">
+        <section class="space-y-6 w-[80%] mx-auto">
+
+            <!-- <button class="bg-blue-500 text-white py-2 px-5 rounded-md"
+                    id="all-btn">Primary</button> -->
+
+            <div class="bg-white p-6 space-x-2 md:space-x-4 rounded-md">
+
+                <button class="btn bg-blue-500 text-white py-2 px-5 sm:w-[50px] md:w-[100px] ">All</button>
+                <button class="btn bg-white py-2 px-5 hover:bg-blue-200 sm:w-[50px] md:w-[100px]">Open</button>
+                <button class="btn bg-white py-2 px-5 hover:bg-blue-200 sm:w-[50px] md:w-[100px]">Closed</button>
+            </div>
+            <!-- class="bg-blue-500 text-white py-2 px-5 rounded-md"
+                    id="all-btn" -->
+            <!-- 1 onclick="toggleStyle('all-btn')" //onclick="toggleStyle('interview-btn')"//onclick="toggleStyle('rejected-btn')" -->
+
+
+            <!-- <section id="fill-section" class="hidden space-y-6  p-8 ">
+
+            </section> -->
+        </section>
+
+        <!-- 50 issue section -->
+        <section class="w-[80%] mx-auto mt-3 bg-white rounded-md shadow-md shrink-0.5 ">
+            <div class=" md:flex items-center justify-between p-6 bg-white border border-gray-100 rounded-md shadow-sm">
+
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800">50 Issues</h3>
+                        <p class="text-sm text-slate-500">Track and manage your project issues</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 bg-emerald-500 rounded-full"></span>
+                        <span class="text-sm font-medium text-slate-700">Open</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 bg-purple-500 rounded-full"></span>
+                        <span class="text-sm font-medium text-slate-700">Closed</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- all card section -->
+            <div class=" mt-1 p-3 sm:flex md:flex flex-4 gap-3 bg-white space-y-3">
+                <!-- 1 -->
+                <div class="card bg-base-100 shadow-sm">
+                    <figure>
+                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                            alt="Shoes" />
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            Card Title
+                            <div class="badge badge-secondary">NEW</div>
+                        </h2>
+                        <p>A card component has a figure, a body part, and inside body there are title and actions parts
+                        </p>
+                        <div class="card-actions justify-end">
+                            <div class="badge badge-outline">Fashion</div>
+                            <div class="badge badge-outline">Products</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="card bg-base-100 shadow-sm">
+                    <figure>
+                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                            alt="Shoes" />
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            Card Title
+                            <div class="badge badge-secondary">NEW</div>
+                        </h2>
+                        <p>A card component has a figure, a body part, and inside body there are title and actions parts
+                        </p>
+                        <div class="card-actions justify-end">
+                            <div class="badge badge-outline">Fashion</div>
+                            <div class="badge badge-outline">Products</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="card bg-base-100 shadow-sm">
+                    <figure>
+                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                            alt="Shoes" />
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            Card Title
+                            <div class="badge badge-secondary">NEW</div>
+                        </h2>
+                        <p>A card component has a figure, a body part, and inside body there are title and actions parts
+                        </p>
+                        <div class="card-actions justify-end">
+                            <div class="badge badge-outline">Fashion</div>
+                            <div class="badge badge-outline">Products</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4 -->
+                <div class="card bg-base-100 shadow-sm">
+                    <figure>
+                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                            alt="Shoes" />
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            Card Title
+                            <div class="badge badge-secondary">NEW</div>
+                        </h2>
+                        <p>A card component has a figure, a body part, and inside body there are title and actions parts
+                        </p>
+                        <div class="card-actions justify-end">
+                            <div class="badge badge-outline">Fashion</div>
+                            <div class="badge badge-outline">Products</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
 
 </body>
 
