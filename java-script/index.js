@@ -1,5 +1,5 @@
-// console.log('Ooooooo')
-
+console.log('Ooooooo')
+//// Sign In page js-----------------
 document.getElementById('btnSignIn').addEventListener('click', function(){
     console.log('login done')
     // 1 get the mobile number
@@ -25,3 +25,4 @@ document.getElementById('btnSignIn').addEventListener('click', function(){
     return;
     
 });
+
