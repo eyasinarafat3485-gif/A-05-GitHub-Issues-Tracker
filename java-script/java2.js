@@ -93,40 +93,6 @@ function displayIssues(issues) {
     });
 };
 
-// const loadWordDetail= async(id)=>{
-//     const url=`https://phi-lab-server.vercel.app/api/v1/lab/issues/${id}`;
-//     console.log(url);
-//     const res= await fetch(url);
-//     const details= await res.json();
-//     displayWordDetails(details.data);
-// };
-
-
-// displayWordDetails=(issues)=>{
-//     console.log(issues);
-//       const detailsContainer= document.getElementById('details-container');
-//    detailsContainer.innerHTML=`<div>
-//                 <h2 class="text-2xl font-bold">${issues.title} (<i class="fa-solid fa-microphone-lines"></i>:${issues.Status})</h2>
-//                 </div>
-
-//                 <div>
-
-//                 <p>${issues.description}</p>
-//                 </div>
-
-//                 <div>
-//                 <h2 class=" font-bold">Example</h2>
-//                 <p>${word.sentence}</p>
-//                 </div>
-
-//                 <div>
-//                 <h2 class=" font-bold">Synonym</h2>
-//                 <span class="btn"> Syn1</span>
-//                 <span class="btn"> Syn1</span>
-//                 <span class="btn"> Syn1</span>
-//                 </div>`;
-//    document.getElementById('word_modal').showModal();
-// }
 
 const allCard = document.getElementById('allCardSection')
 const allbtn = document.getElementById('allBtn');
