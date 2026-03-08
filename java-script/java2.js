@@ -1,18 +1,41 @@
-console.log('heooo java tava');
+// console.log('heooo java tava');
 //// Home page js--------------------
+let allData = []; 
 
-let openList = [];
-let closeList = [];
-let currentStatus = 'all-btn'
+const createBadge = (arr) => {
+    const htmlElement = arr.map((el) => {
+        let colorClasses = " ";
+        if (el === "bug") {
+            colorClasses = "text-[#EF4444] bg-[#FECACA] border-red-300";
+        } else if (el === "enhancement") {
+            colorClasses = "text-green-700 bg-[#BBF7D0] border-green-300";
+        } else if (el === "good first issue") {
+            colorClasses = "text-orange-600 bg-orange-50 border-orange-300";
+        } else if (el === "help wanted") {
+            colorClasses = "text-[#D97706] bg-[#FDE68A] border-orange-300";
+        } else if (el === "documentation") {
+            colorClasses = "text-blue-600 bg-blue-50 border-blue-300";
+        }
+        return `
+       <span class="uppercase mr-[5px] px-3 py-1 text-[12px] font-semibold rounded-full border ${colorClasses}">
+          ${el}
+       </span>
+     `;
+    });
+    return htmlElement.join(" ");
+};
+
 
 async function loadIssues() {
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     console.log(res);
     const data = await res.json();
     displayIssues(data.data);
+    allData = data.data;
 
     // console.log(allCard);
 };
+
 
 const loadWordDetail = async (id) => {
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
@@ -30,17 +53,18 @@ const displayWordDetails = (issue) => {
     <div class="space-y-2">
     <h2 class="text-[23px] font-semibold">${issue.title}</h2>
     <div class="space-y-2 flex flex-2 gap-4">
-    <img src="" alt="">${issue.Status}
+
+    <span class="btn btn-primary rounded-full">${issue.status}
+    <img src="" alt="" > </span>
     <p class="hello text-[14px] ">${issue.author}</p>                     
     <p class="hello text-[14px]">${issue.createdAt}</p>
     </div>
     </div>
 
     <div class="space-y-2">
-    <div class="btn bg-red-100 w-[61px] rounded-full text-red-600 text-[7px]  border-red-500"><span><i class="fa-brands fa-linux"></i></span>${issue.labels}</div>
-
-    <div class="btn bg-orange-100 w-[90px] rounded-full text-orange-600 text-[7px]  px-[5px] border-orange-500"><span><i class="fa-brands fa-gg-circle"></i></span>${issue.labels}
-    </div>
+    <div class="flex flex-wrap gap-2 mb-3 md:mb-4 mt-4">
+        ${createBadge(issue.labels)}
+     </div>
     
 
     <div class="space-y-2">
@@ -48,56 +72,60 @@ const displayWordDetails = (issue) => {
     </div>
                         
    <div class="bg-gray-100 p-2 rounded-sm flex flex-3 gap-5 justify-around">
-    <p class="hello text-[14px] ">Assignee: <span>${issue.assignee}</span></p>   
-    <p class="hello text-[14px] ">Priority: <span>${issue.priority}</span></p>
-     </div>
+    <p class="hello text-[14px] ">Assignee: <span>${issue.assignee ? issue.assignee : "assignee not found"}</span></p>   
+    <p class="hello text-[14px] ">Priority: <span class="badge bg-red-100 w-[70px] rounded-full text-red-600">${issue.priority}</span></p>
+    </div>
     `;
 
     document.getElementById('issue_modal').showModal();
 }
 
 function displayIssues(issues) {
-    console.log(issues);
-    issues.forEach(issues => {
-        console.log(issues);
+    issuecount.innerText = issues.length;
+    allCard.innerHTML = " ";
 
+    issues.forEach(element => {
+        console.log(element);
+        const borderTop = element.status === 'open' ? 'border-t-green-500' : 'border-t-purple-500'
         const card = document.createElement('div');
-        card.className = "allCards mt-1 p-3 sm:col md:grid-cols-4 bg-white space-y-2 ";
+        card.className = "allCards mt-1 p-[10px] sm:col md:grid-cols-4 bg-white space-y-2 ";
         card.innerHTML = ` 
-          <div  onclick="loadWordDetail(${issues.id})" class="card bg-base-100 p-[15px] border-t-8 shadow-sm shadow-gray-600 space-y-3">
+          <div  onclick="loadWordDetail(${element.id})" class="border border-t-4 card bg-base-100 p-[11px] ${borderTop} shadow-sm shadow-gray-600 space-y-1">
           
                     <figure class=" justify-between">
-                        <img src="" alt="">${issues.Status}
-                        <div class="badge bg-red-100 w-[70px] rounded-full text-red-600 text-[16px] py-[15px] px-[35px]"> ${issues.priority}</div>
+                        <span class=" px-[11px] py-[11px] rounded-full">
+                        <img src="${element.status==="open" ? '../assets/Open-Status.png': '../assets/Closed-Status.png'}" alt="" ></span>
+                        <div class="badge bg-red-100 w-[70px] rounded-full text-red-600 text-[16px] py-[15px] px-[45px]"> ${element.priority}</div>
                     </figure>
-                    <h2 class="text-[23px] font-semibold">${issues.title}</h2>
-                    <h3 class="hello text-[15px] ">${issues.description}</h3>
-                    <div class="card-body w-full grid grid-cols-2 text-center ">
+                    <h2 class="text-[23px] font-semibold">${element.title}</h2>
+                    <h3 class="hello text-[15px] ">${element.description}</h3>
+                    <div class="card-body w-full text-center">
                      
                     
-                        <div class="btn bg-red-100 w-[61px] rounded-full text-red-600 text-[7px]  border-red-500"><span><i class="fa-brands fa-linux"></i></span>${issues.labels}</div>
-
-                        <div class="btn bg-orange-100 w-[90px] rounded-full text-orange-600 text-[7px]  px-[5px] border-orange-500"><span><i class="fa-brands fa-gg-circle"></i></span>${issues.labels}
-                        </div>
+                     <div class="flex flex-wrap gap-2 mb-3 md:mb-1">
+                         ${createBadge(element.labels)}
+                   </div>
+                       
                        
                         </div>                        
                         <hr class="hello">
-                        <p class="hello text-[14px] pt-4">${issues.author}</p>
+                        <p class="hello text-[14px] pt-4">${element.author}</p>
                         
-                        <p class="hello text-[14px]">${issues.createdAt}</p>
-                        <p class="hello text-[14px]">${issues.updatedAt}</p>
+                        <p class="hello text-[14px]">${element.createdAt}</p>
+                        <p class="hello text-[14px]">${element.updatedAt}</p>
                     </div> 
                     
         `;
         allCard.appendChild(card);
     });
 };
-
+                   
 
 const allCard = document.getElementById('allCardSection')
 const allbtn = document.getElementById('allBtn');
 const openbtn = document.getElementById('openBtn');
 const closedbtn = document.getElementById('closedBtn');
+const issuecount = document.getElementById('issueCount');
 
 function toggleStyle(id) {
     // console.log('clicked :', id)
@@ -117,38 +145,7 @@ function toggleStyle(id) {
 
     selected.classList.remove('bg-white', 'text-red-500');
     selected.classList.add('bg-blue-500', 'text-white');
-    // document.getElementById('notShowSection').classList.add('hidden');
-
-
-    // if (id == 'openbtn') {
-    //     allCard.classList.add('hidden');
-    //     fillSection.classList.remove('hidden')
-    //     // renderInterview()
-    //     document.getElementById("total").innerText = openList.length;
-
-    //     // if (openList.length <= 0) {
-    //     //     document.getElementById('notShowSection').classList.remove('hidden');
-
-    //     // }
-
-    // }
-    // else if (id == 'allbtn') {
-    //     allCard.classList.remove('hidden');
-    //     fillSection.classList.add('hidden');
-    //     console.log(allCard.children.length);
-    //     document.getElementById("total").innerText = allCard.children.length;
-
-    // }
-    // else if (id == 'closedbtn') {
-    //     allCard.classList.add('hidden');
-    //     fillSection.classList.remove('hidden')
-    //     // renderRejected()
-    //     document.getElementById("total").innerText = rejectList.length;
-    //     // if (rejectList.length <= 0) {
-    //     //     document.getElementById('notShowSection').classList.remove('hidden');
-
-    //     // }
-    // };
+    
 
 };
 
@@ -156,18 +153,37 @@ function toggleStyle(id) {
 loadIssues();
 // toggleStyle();
 
-document.getElementById('btn-search').addEventListener('click', ()=>{
-    const input= document.getElementById('input-search');
-    const searchValue= input.value.trim().toLowerCase();
+document.getElementById('btn-search').addEventListener('click', () => {
+    const input = document.getElementById('input-search');
+    const searchValue = input.value.trim().toLowerCase();
     console.log(searchValue);
 
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
-    .then((res)=>res.json())
-    .then((data)=>{
-        const allWords= data.data;
-        console.log(allWords);
-        const filterWords= allWords.filter(word=> word.word.toLowerCase().includes(searchValue));
-        displayIssues(filterWords)
-    });
+        .then((res) => res.json())
+        .then((data) => {
+            const allWords = data.data;
+            console.log(allWords);
+            const filterWords = allWords.filter(word => word.title.toLowerCase().includes(searchValue));
+            displayIssues(filterWords);
+        });
 });
+const filterIssue = (status) => {
+    if (status !== 'all') {
+        const filteredIssue = allData.filter(
+            (item) => item.status.toLowerCase() === status.toLowerCase()
+        );
+        displayIssues(filteredIssue)
+
+    }
+    else if (status == 'all') {
+        displayIssues(allData)
+    }
+}
+
+displayIssues();
+
+
+
+
+
 
