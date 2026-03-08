@@ -25,27 +25,34 @@
             <div class="flex items-center justify-between max-w-7xl mx-auto">
 
                 <div class="flex items-center space-x-2">
-                     <img src="assets/github-logo.png" alt="" class="w-[41px] ">
+                    <img src="assets/github-logo.png" alt="" class="w-[41px] ">
                     <span class="font-semibold text-xl ">GitHub Issues Tracker</span>
                 </div>
 
                 <div class="flex items-center space-x-4">
                     <div id="nav-content" class="hidden md:flex items-center space-x-3">
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-400">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="join">
+                            <div>
+                                <label class="input validator join-item">
+                                
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
-                            </span>
-                            <input type="search" placeholder="Search issues..."class="border rounded-md py-1 pl-8 pr-2 w-50 focus:w-64 transition-all duration-200 outline-none ">
+                                    <input id="input-search" type="search" placeholder="Search issues. . ." />
+                                </label>
+                                
+                            </div>
+                            <button id="btn-search" class="btn btn-primary join-item">Search</button>
                         </div>
 
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-4 rounded-md flex items-center"><span class="mr-1 text-lg">+</span> New Issue </button>
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-4 rounded-md flex items-center"><span class="mr-1 text-lg">+</span> New Issue </button>
                     </div>
 
                     <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
                         </svg>
                     </button>
                 </div>
@@ -69,18 +76,21 @@
 
             <div class="bg-white p-6 space-x-2 md:space-x-4 rounded-md">
 
-                <button class="btn bg-blue-500 text-white py-2 px-5 sm:w-[50px] md:w-[100px] ">All</button>
-                <button class="btn bg-white py-2 px-5 hover:bg-blue-200 sm:w-[50px] md:w-[100px]">Open</button>
-                <button class="btn bg-white py-2 px-5 hover:bg-blue-200 sm:w-[50px] md:w-[100px]">Closed</button>
+                <button onclick="toggleStyle('allBtn')" id="allBtn"
+                    class="btn bg-blue-500 text-white py-2 px-5 sm:w-[50px] md:w-[100px] ">All</button>
+
+                <button onclick="toggleStyle('openBtn')" id="openBtn"
+                    class="btn bg-white py-2 px-5 hover:bg-blue-200 sm:w-[50px] md:w-[100px]">Open</button>
+
+                <button onclick="toggleStyle('closedBtn')" id="closedBtn"
+                    class="btn bg-white py-2 px-5 hover:bg-blue-200 sm:w-[50px] md:w-[100px]">Closed</button>
             </div>
-            <!-- class="bg-blue-500 text-white py-2 px-5 rounded-md"
-                    id="all-btn" -->
-            <!-- 1 onclick="toggleStyle('all-btn')" //onclick="toggleStyle('interview-btn')"//onclick="toggleStyle('rejected-btn')" -->
+
+            <section id="fill-section" class="hidden space-y-6  p-8 ">
+
+            </section>
 
 
-            <!-- <section id="fill-section" class="hidden space-y-6  p-8 ">
-
-            </section> -->
         </section>
 
         <!-- 50 issue section -->
@@ -89,16 +99,16 @@
 
                 <div class="flex items-center gap-4 ">
                     <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full">
-                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <img src="assets/Aperture.png" alt="">
                     </div>
 
                     <div class="sm:grid grid-cols-4">
                         <div>
-                            <h3 class="text-xl font-bold text-slate-800">50 Issues</h3>
+
+                            <span class="text-xl font-bold text-slate-800">
+                                <p id="total" class="font-bold text-2xl">0</p>Issues
+                            </span>
+
                             <p class="text-sm text-slate-500">Track and manage your project issues</p>
                         </div>
                     </div>
@@ -118,12 +128,31 @@
             </div>
 
             <!-- all card section -->
-            <div id="cardContainer" class=" mt-1 p-3 sm:col md:grid grid-cols-4 gap-2 bg-white space-y-3 ">
+            <div id="allCardSection" class="allCards mt-1 p-3 sm:col md:grid grid-cols-4 gap-2 bg-white space-y-3 ">
 
                 <!-- 1 -->
 
             </div>
         </section>
+        <!-- modal -->
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+        <dialog id="issue_modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <div id="details-container">
+
+
+
+                </div>
+
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn btn-primary">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
     </main>
 
 
