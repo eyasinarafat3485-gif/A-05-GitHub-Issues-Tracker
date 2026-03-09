@@ -25,19 +25,32 @@ const createBadge = (arr) => {
     return htmlElement.join(" ");
 };
 
+const manageSpinner= (status)=>{
+    if(status== true){
+        document.getElementById('spinner').classList.remove('hidden');
+        document.getElementById('allCardSection').classList.add('hidden');
+    }else{
+        document.getElementById('allCardSection').classList.remove('hidden');
+        document.getElementById('spinner').classList.add('hidden');
+    };
+};
+
 
 async function loadIssues() {
+    manageSpinner(true);
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     console.log(res);
     const data = await res.json();
     displayIssues(data.data);
     allData = data.data;
+    manageSpinner(false);
 
     // console.log(allCard);
 };
 
 
 const loadWordDetail = async (id) => {
+    
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
     // console.log(url);
     const res = await fetch(url);
@@ -118,9 +131,9 @@ function displayIssues(issues) {
         `;
         allCard.appendChild(card);
     });
+    manageSpinner(false);
 };
-                   
-
+             
 const allCard = document.getElementById('allCardSection')
 const allbtn = document.getElementById('allBtn');
 const openbtn = document.getElementById('openBtn');
@@ -146,7 +159,6 @@ function toggleStyle(id) {
     selected.classList.remove('bg-white', 'text-red-500');
     selected.classList.add('bg-blue-500', 'text-white');
     
-
 };
 
 
@@ -178,7 +190,7 @@ const filterIssue = (status) => {
     else if (status == 'all') {
         displayIssues(allData)
     }
-}
+};
 
 displayIssues();
 
